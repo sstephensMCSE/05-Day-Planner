@@ -1,100 +1,55 @@
-var timeBlocks = $(".container");
+var container = $(".container");
+var button = document.querySelectorAll("button");
 
-var timeDisplay = moment().format('MMMM Do YYYY');
-
-var timeDiv = $("#currentDay");
-timeDiv.append(timeDisplay);
-
-var saveButton = document.querySelectorAll("button");
-
-var timeList = [
-    "9 AM",
-    "10 AM",
-    "11 AM",
-    "12 AM",
-    "1 PM",
-    "2 PM",
-    "3 PM",
-    "4 PM",
-    "5 PM"
+var timeData = [
+    ["9 AM","9"],
+    ["10 AM","10"],
+    ["11 AM","11"],
+    ["12 AM","12"],
+    ["1 PM","13"],
+    ["2 PM","14"],
+    ["3 PM","15"],
+    ["4 PM","16"],
+    ["5 PM","17"]
 ];
 
-var idTime = [
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17"
-];
+// build the rows using javascript
+for (var i = 0; i < timeData.length; i++) {
+ 
+    var rowObj = $("<div class='row time-block'>").attr("id", timeData[i][1]);
+    var divObj2 = $("<div class='hour col-1'>")
+    var divObj = $("<textarea class='col-10'>");
+    var buttonObj = $("<button type='button' class='saveBtn col-1 fas fa-save fa-2x'>").attr("id", timeData[i][1]);
 
-for (var i = 0; i < timeList.length; i++) {
-    var newRow = $("<div class='row time-block'>").attr("id", idTime[i]);
-    var newDiv2 = $("<div class='hour col-1'>")
-    var newDiv = $("<textarea class='col-10'>");
-    var newButt = $("<button type='button' class='saveBtn col-1 far fa-save'>");
+    container.append(rowObj);
+    divObj2.text(timeData[i][0]);
+    rowObj.append(divObj2);
 
-    timeBlocks.append(newRow);
+    divObj.text();
+    rowObj.append(divObj);
 
-    newDiv2.text(timeList[i]);
-    newRow.append(newDiv2);
-
-    newDiv.text();
-    newRow.append(newDiv);
-
-    newButt.text();
-    newRow.append(newButt);
+    buttonObj.text();
+    rowObj.append(buttonObj);
 }
 
-localStorageFunction();
 
-function localStorageFunction() {
-    
-    $("textarea")[0].value = localStorage.getItem("textarea1");
-    $("textarea")[1].value = localStorage.getItem("textarea2");
-    $("textarea")[2].value = localStorage.getItem("textarea3");
-    $("textarea")[3].value = localStorage.getItem("textarea4");
-    $("textarea")[4].value = localStorage.getItem("textarea5");
-    $("textarea")[5].value = localStorage.getItem("textarea6");
-    $("textarea")[6].value = localStorage.getItem("textarea7");
-    $("textarea")[7].value = localStorage.getItem("textarea8");
-    $("textarea")[8].value = localStorage.getItem("textarea9");
-}
+// get the tasks from storage
+for (var i = 0; i < 8; i++) {$("textarea")[i].value = localStorage.getItem(`textarea${i}`);}
 
-$("button").on("click", function(event) {
-    event.preventDefault();
-    var textArea1 = $("textarea")[0].value;
-    var textArea2 = $("textarea")[1].value;
-    var textArea3 = $("textarea")[2].value;
-    var textArea4 = $("textarea")[3].value;
-    var textArea5 = $("textarea")[4].value;
-    var textArea6 = $("textarea")[5].value;
-    var textArea7 = $("textarea")[6].value;
-    var textArea8 = $("textarea")[7].value;
-    var textArea9 = $("textarea")[8].value;
 
-    localStorage.setItem("textarea1", textArea1);
-    localStorage.setItem("textarea2", textArea2);
-    localStorage.setItem("textarea3", textArea3);
-    localStorage.setItem("textarea4", textArea4);
-    localStorage.setItem("textarea5", textArea5);
-    localStorage.setItem("textarea6", textArea6);
-    localStorage.setItem("textarea7", textArea7);
-    localStorage.setItem("textarea8", textArea8);
-    localStorage.setItem("textarea9", textArea9);
-});
-
-function hourUpdater() {
-    var currentHour = moment().hours();
+function refreshPage() {
+    // get the current time
+    var date = moment();
+    var timeDiv = $("#currentDay");
+    // Put time at the top
+    timeDiv.html("<p>Date: "+date.format('MMMM Do YYYY, h:mm:ss a')+"</p>");
+    // for each time-block set the css style based on hour
     $(".time-block").each(function() {
-        var blockHour = parseInt($(this).attr("id").split(" ")[0]);
-
-        if (blockHour < currentHour) {
+        // getthe hour id from the object
+        var rowHour = parseInt($(this).attr("id").split(" ")[0]);
+        if (rowHour < date.hours()) {
             $(this).addClass("past");
-        } else if (blockHour === currentHour) {
+        } else if (rowHour === date.hours()) {
             $(this).removeClass("past");
             $(this).addClass("present");
         } else {
@@ -105,6 +60,14 @@ function hourUpdater() {
     });
 }
 
-hourUpdater();
+// initial refresh
+refreshPage();
+// update the page every minute
+var checkTime = setInterval(refreshPage, 1000);
 
-var checkTime = setInterval(hourUpdater, 15000);
+// save the text to local storage on click
+$("button").on("click", function(event) {
+    event.preventDefault();
+    localStorage.setItem(`textarea${event.target.id-9}`,  $("textarea")[event.target.id-9].value);
+    
+});
