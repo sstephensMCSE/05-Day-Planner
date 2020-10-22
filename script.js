@@ -18,22 +18,22 @@ for (var i = 0; i < timeData.length; i++) {
  
     var rowObj = $("<div class='row time-block'>").attr("id", timeData[i][1]);
     var divObj2 = $("<div class='hour col-1'>")
-    var divObj = $("<textarea class='col-10'>");
+    var divObj = $("<textarea class='col-10'>").attr("id", timeData[i][1]);
     var buttonObj = $("<button type='button' class='saveBtn col-1 fas fa-save fa-2x'>").attr("id", timeData[i][1]);
 
     container.append(rowObj);
     divObj2.text(timeData[i][0]);
     rowObj.append(divObj2);
 
-    divObj.text();
+//    divObj.text();
     rowObj.append(divObj);
 
-    buttonObj.text();
+  //  buttonObj.text();
     rowObj.append(buttonObj);
 }
 
 
-// get the tasks from storage
+// get the tasks from browser storage
 for (var i = 0; i < 8; i++) {$("textarea")[i].value = localStorage.getItem(`textarea${i}`);}
 
 
@@ -64,6 +64,11 @@ function refreshPage() {
 refreshPage();
 // update the page every minute
 var checkTime = setInterval(refreshPage, 1000);
+
+// todo change button icon for unsaved changes.
+// $('#9').on('keydown', function (e) {
+//     console.log(e.which);
+//   });
 
 // save the text to local storage on click
 $("button").on("click", function(event) {
