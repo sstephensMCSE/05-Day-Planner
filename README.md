@@ -23,8 +23,6 @@ https://github.com/sstephensMCSE/05-Day-Planner/
 
 ## Screenshots
 
-<img src="https://github.com/sstephensMCSE/04-Web-APIs-Code-Quiz/blob/main/assets/welcome.jpg" width="500" title="Welcome">
-<img src="https://github.com/sstephensMCSE/04-Web-APIs-Code-Quiz/blob/main/assets/variable%20questions.jpg" width="500" title="Questions">
-<img src="https://github.com/sstephensMCSE/04-Web-APIs-Code-Quiz/blob/main/assets/SubmitScore.jpg" width="500" title="Submit Score">
-<img src="https://github.com/sstephensMCSE/04-Web-APIs-Code-Quiz/blob/main/assets/highscoremodal.jpg" width="500" title="HighScore">
-<img src="https://github.com/sstephensMCSE/04-Web-APIs-Code-Quiz/blob/main/assets/local%20storage.jpg" width="500" title="Storage">
+<img src="https://github.com/sstephensMCSE/05-Day-Planner/blob/main/project.jpg" width="500" title="Project">
+<img src="https://github.com/sstephensMCSE/05-Day-Planner/blob/main/Storage.jpg" width="500" title="Storage">
+
