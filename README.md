@@ -3,7 +3,7 @@
 The objective of this assignment is to demonstrate the capabilities of Javascript to interact with the web browser API's. This makes the webpage interactive by using actions to modify the HTML code. Create a simple calendar application that allows the user to save events for each hour of the day. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery. 
 
 ## User Story
-AS A coding bootcamp student i want to take a timed quiz on JavaScript fundamentals that stores high scores
+AS A coding bootcamp student I want to make a Day Planner to keep track of my busy schedule.
 
 The project contains:
 * Timers that produce updates to the page
